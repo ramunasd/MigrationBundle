@@ -1,17 +1,17 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Migration\Loader;
+namespace RDV\Bundle\MigrationBundle\Migration\Loader;
 
 use Doctrine\ORM\EntityManager;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
 
-use Oro\Bundle\MigrationBundle\Entity\DataFixture;
-use Oro\Bundle\MigrationBundle\Migration\Sorter\DataFixturesSorter;
-use Oro\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture;
-use Oro\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
-use Oro\Bundle\MigrationBundle\Fixture\LoadedFixtureVersionAwareInterface;
+use RDV\Bundle\MigrationBundle\Entity\DataFixture;
+use RDV\Bundle\MigrationBundle\Migration\Sorter\DataFixturesSorter;
+use RDV\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture;
+use RDV\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
+use RDV\Bundle\MigrationBundle\Fixture\LoadedFixtureVersionAwareInterface;
 
 class DataFixturesLoader extends ContainerAwareLoader
 {
@@ -83,7 +83,7 @@ class DataFixturesLoader extends ContainerAwareLoader
         if (!$this->loadedFixtures) {
             $this->loadedFixtures = [];
 
-            $loadedFixtures = $this->em->getRepository('OroMigrationBundle:DataFixture')->findAll();
+            $loadedFixtures = $this->em->getRepository('MigrationBundle:DataFixture')->findAll();
             /** @var DataFixture $fixture */
             foreach ($loadedFixtures as $fixture) {
                 $this->loadedFixtures[$fixture->getClassName()] = $fixture->getVersion() ?: '0.0';

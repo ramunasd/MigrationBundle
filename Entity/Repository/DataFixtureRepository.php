@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Entity\Repository;
+namespace RDV\Bundle\MigrationBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -31,11 +31,11 @@ class DataFixtureRepository extends EntityRepository
      * @param string $where        condition
      * @param array  $parameters   optional parameters for where condition
      */
-    public function updateDataFixutreHistory(array $updateFields, $where, array $parameters = [])
+    public function updateDataFixtureHistory(array $updateFields, $where, array $parameters = [])
     {
         $qb = $this->_em
             ->createQueryBuilder()
-            ->update('OroMigrationBundle:DataFixture', 'm')
+            ->update('MigrationBundle:DataFixture', 'm')
             ->where($where);
 
         foreach ($updateFields as $fieldName => $fieldValue) {

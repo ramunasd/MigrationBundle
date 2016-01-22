@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Migration\Extension;
+namespace RDV\Bundle\MigrationBundle\Migration\Extension;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Schema\ForeignKeyConstraint;
@@ -8,10 +8,10 @@ use Doctrine\DBAL\Schema\Index;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\TableDiff;
-use Oro\Bundle\MigrationBundle\Migration\QueryBag;
-use Oro\Bundle\MigrationBundle\Migration\Schema\Column;
-use Oro\Bundle\MigrationBundle\Migration\SqlMigrationQuery;
-use Oro\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
+use RDV\Bundle\MigrationBundle\Migration\QueryBag;
+use RDV\Bundle\MigrationBundle\Migration\Schema\Column;
+use RDV\Bundle\MigrationBundle\Migration\SqlMigrationQuery;
+use RDV\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
 
 class RenameExtension implements DatabasePlatformAwareInterface, NameGeneratorAwareInterface
 {

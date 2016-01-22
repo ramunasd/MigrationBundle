@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Migration;
+namespace RDV\Bundle\MigrationBundle\Migration;
 
 use Doctrine\DBAL\Schema\Schema;
 
@@ -28,7 +28,7 @@ class UpdateBundleVersionMigration implements Migration, FailIndependentMigratio
             foreach ($bundleVersions as $bundleName => $bundleVersion) {
                 $sql = sprintf(
                     "INSERT INTO %s (bundle, version, loaded_at) VALUES ('%s', '%s', '%s')",
-                    CreateMigrationTableMigration::MIGRATION_TABLE,
+                    Tables::MIGRATION_TABLE,
                     $bundleName,
                     $bundleVersion,
                     $date->format('Y-m-d H:i:s')

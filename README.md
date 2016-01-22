@@ -1,7 +1,19 @@
-OroMigrationBundle
+MigrationBundle
 ==================
 
-Database structure and data manipulator.
+Doctrine based database schema and fixtures manipulator.
+
+
+Overview
+--------
+
+MigrationBundle is forked version of an open source [ORO platform migration bundle](https://github.com/orocrm/platform/tree/master/src/Oro/Bundle/MigrationBundle). ORO developers made a great tool, but they are not interested in contributions from community. That's why we forked this bundle and made it available for everyone. 
+
+
+Installation
+------------
+
+```composer require ramunasd/migration-bundle```
 
 Database structure migrations
 -----------------------------
@@ -30,10 +42,10 @@ Example of migration file:
 namespace Acme\Bundle\TestBundle\Migrations\Schema\v1_0;
 
 use Doctrine\DBAL\Schema\Schema;
-use Oro\Bundle\MigrationBundle\Migration\Migration;
-use Oro\Bundle\MigrationBundle\Migration\QueryBag;
-use Oro\Bundle\MigrationBundle\Migration\Extension\RenameExtension;
-use Oro\Bundle\MigrationBundle\Migration\Extension\RenameExtensionAwareInterface;
+use RDV\Bundle\MigrationBundle\Migration\Migration;
+use RDV\Bundle\MigrationBundle\Migration\QueryBag;
+use RDV\Bundle\MigrationBundle\Migration\Extension\RenameExtension;
+use RDV\Bundle\MigrationBundle\Migration\Extension\RenameExtensionAwareInterface;
 
 class AcmeTestBundle implements Migration, RenameExtensionAwareInterface
 {
@@ -91,8 +103,8 @@ Example of install migration file:
 namespace Acme\Bundle\TestBundle\Migrations\Schema;
 
 use Doctrine\DBAL\Schema\Schema;
-use Oro\Bundle\MigrationBundle\Migration\Installation;
-use Oro\Bundle\MigrationBundle\Migration\QueryBag;
+use RDV\Bundle\MigrationBundle\Migration\Installation;
+use RDV\Bundle\MigrationBundle\Migration\QueryBag;
 
 class AcmeTestBundleInstaller implements Installation
 {
@@ -118,7 +130,7 @@ class AcmeTestBundleInstaller implements Installation
 
 ```
 
-To run migrations, there is **oro:migration:load** command. This command collects migration files from bundles, sorts them by version number and applies changes.
+To run migrations, there is **rdv:migration:load** command. This command collects migration files from bundles, sorts them by version number and applies changes.
 
 This command supports some additional options:
 
@@ -128,7 +140,7 @@ This command supports some additional options:
  - **bundles** - A list of bundles to load data from. If option is not set, migrations will be taken from all bundles;
  - **exclude** - A list of bundle names which migrations should be skipped.
 
-Also there is **oro:migration:dump** command to help in creation installation files. This command outputs current database structure as a plain sql or as `Doctrine\DBAL\Schema\Schema` queries.
+Also there is **rdv:migration:dump** command to help in creation installation files. This command outputs current database structure as a plain sql or as `Doctrine\DBAL\Schema\Schema` queries.
 
 This command supports some additional options:
 
@@ -141,8 +153,8 @@ Good practice for bundle is to have installation file for current version and mi
 Next algorithm may be used for new versions of your bundle:
 
  - Create new migration
- - Apply it with **oro:migration:load**
- - Generate fresh installation file with **oro:migration:dump**
+ - Apply it with **rdv:migration:load**
+ - Generate fresh installation file with **rdv:migration:dump**
  - If required - add migration extensions calls to generated installation.
 
 Examples of database structure migrations
@@ -162,10 +174,10 @@ Sometime you cannot use standard Doctrime methods for database structure modific
 namespace Acme\Bundle\TestBundle\Migrations\Schema\v1_0;
 
 use Doctrine\DBAL\Schema\Schema;
-use Oro\Bundle\MigrationBundle\Migration\Migration;
-use Oro\Bundle\MigrationBundle\Migration\QueryBag;
-use Oro\Bundle\MigrationBundle\Migration\Extension\RenameExtension;
-use Oro\Bundle\MigrationBundle\Migration\Extension\RenameExtensionAwareInterface;
+use RDV\Bundle\MigrationBundle\Migration\Migration;
+use RDV\Bundle\MigrationBundle\Migration\QueryBag;
+use RDV\Bundle\MigrationBundle\Migration\Extension\RenameExtension;
+use RDV\Bundle\MigrationBundle\Migration\Extension\RenameExtensionAwareInterface;
 
 class AcmeTestBundle implements Migration, RenameExtensionAwareInterface
 {
@@ -214,7 +226,7 @@ To create your own extension you need too do the following simple steps:
 namespace Acme\Bundle\TestBundle\Migration\Extension;
 
 use Doctrine\DBAL\Schema\Schema;
-use Oro\Bundle\MigrationBundle\Migration\QueryBag;
+use RDV\Bundle\MigrationBundle\Migration\QueryBag;
 
 class MyExtension
 {
@@ -255,7 +267,7 @@ services:
     acme_test.migration.extension.my:
         class: %acme_test.migration.extension.my.class%
         tags:
-            - { name: oro_migration.extension, extension_name: test /*, priority: -10 - priority attribute is optional an can be helpful if you need to override existing extension */ }
+            - { name: rdv_migration.extension, extension_name: test /*, priority: -10 - priority attribute is optional an can be helpful if you need to override existing extension */ }
 ```
 
 If you need an access to the database platform or the name generator you extension class should implement [DatabasePlatformAwareInterface][3] or [NameGeneratorAwareInterface][4] appropriately.
@@ -266,7 +278,7 @@ Data fixtures
 
 Symfony allows to load data using data fixtures. But these fixtures are run each time when `doctrine:fixtures:load` command is executed.
 
-To avoid loading the same fixture several time, **oro:migration:data:load** command was created. This command guarantees that each data fixture will be loaded only once.
+To avoid loading the same fixture several time, **rdv:migration:data:load** command was created. This command guarantees that each data fixture will be loaded only once.
 
 This command supports two types of migration files: `main` data fixtures and `demo` data fixtures. During an installation, user can select to load or not demo data.
 
@@ -292,7 +304,7 @@ namespace Acme\DemoBundle\Migrations\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Oro\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
+use RDV\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
 
 class LoadSomeDataFixture extends AbstractFixture implements VersionedFixtureInterface
 {
@@ -328,8 +340,8 @@ namespace Acme\DemoBundle\Migrations\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Oro\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
-use Oro\Bundle\MigrationBundle\Fixture\RequestVersionFixtureInterface;
+use RDV\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
+use RDV\Bundle\MigrationBundle\Fixture\RequestVersionFixtureInterface;
 
 class LoadSomeDataFixture extends AbstractFixture implements VersionedFixtureInterface, LoadedFixtureVersionAwareInterface
 {

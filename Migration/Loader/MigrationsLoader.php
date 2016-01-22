@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Migration\Loader;
+namespace RDV\Bundle\MigrationBundle\Migration\Loader;
 
 use Doctrine\DBAL\Connection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -11,14 +11,14 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
-use Oro\Bundle\MigrationBundle\Migration\Migration;
-use Oro\Bundle\MigrationBundle\Migration\MigrationState;
-use Oro\Bundle\MigrationBundle\Migration\Installation;
-use Oro\Bundle\MigrationBundle\Migration\OrderedMigrationInterface;
-use Oro\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration;
-use Oro\Bundle\MigrationBundle\Event\MigrationEvents;
-use Oro\Bundle\MigrationBundle\Event\PostMigrationEvent;
-use Oro\Bundle\MigrationBundle\Event\PreMigrationEvent;
+use RDV\Bundle\MigrationBundle\Migration\Migration;
+use RDV\Bundle\MigrationBundle\Migration\MigrationState;
+use RDV\Bundle\MigrationBundle\Migration\Installation;
+use RDV\Bundle\MigrationBundle\Migration\OrderedMigrationInterface;
+use RDV\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration;
+use RDV\Bundle\MigrationBundle\Event\MigrationEvents;
+use RDV\Bundle\MigrationBundle\Event\PostMigrationEvent;
+use RDV\Bundle\MigrationBundle\Event\PreMigrationEvent;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
@@ -381,7 +381,7 @@ class MigrationsLoader
             $reflClass  = new \ReflectionClass($className);
             $sourceFile = $reflClass->getFileName();
             if (isset($files['migrations'][$sourceFile])) {
-                if (is_subclass_of($className, 'Oro\Bundle\MigrationBundle\Migration\Migration')) {
+                if (is_subclass_of($className, 'RDV\Bundle\MigrationBundle\Migration\Migration')) {
                     $migration = new $className;
                     if (isset($migrations[$sourceFile])) {
                         throw new \RuntimeException('A migration script must contains only one class.');
@@ -392,7 +392,8 @@ class MigrationsLoader
                     $migrations[$sourceFile] = $migration;
                 }
             } elseif (isset($files['installers'][$sourceFile])) {
-                if (is_subclass_of($className, 'Oro\Bundle\MigrationBundle\Migration\Installation')) {
+                if (is_subclass_of($className, 'RDV\Bundle\MigrationBundle\Migration\Installation')) {
+                    /** @var \RDV\Bundle\MigrationBundle\Migration\Installation $installer */
                     $installer = new $className;
                     if (isset($migrations[$sourceFile])) {
                         throw new \RuntimeException('An installation  script must contains only one class.');

@@ -1,10 +1,10 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\EventListener;
+namespace RDV\Bundle\MigrationBundle\EventListener;
 
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 
-use Oro\Bundle\EntityExtendBundle\Tools\SchemaTrait;
+use RDV\Bundle\MigrationBundle\Tools\SchemaTrait;
 
 class ConsoleCommandListener
 {

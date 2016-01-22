@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Migration;
+namespace RDV\Bundle\MigrationBundle\Migration;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
@@ -15,7 +15,7 @@ use Doctrine\DBAL\Schema\Sequence;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\TableDiff;
 use Psr\Log\LoggerInterface;
-use Oro\Bundle\MigrationBundle\Exception\InvalidNameException;
+use RDV\Bundle\MigrationBundle\Exception\InvalidNameException;
 
 class MigrationExecutor
 {

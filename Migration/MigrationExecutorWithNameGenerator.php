@@ -1,10 +1,10 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Migration;
+namespace RDV\Bundle\MigrationBundle\Migration;
 
-use Oro\Bundle\MigrationBundle\Exception\InvalidNameException;
-use Oro\Bundle\MigrationBundle\Migration\Schema\SchemaWithNameGenerator;
-use Oro\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
+use RDV\Bundle\MigrationBundle\Exception\InvalidNameException;
+use RDV\Bundle\MigrationBundle\Migration\Schema\SchemaWithNameGenerator;
+use RDV\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
 
 class MigrationExecutorWithNameGenerator extends MigrationExecutor
 {

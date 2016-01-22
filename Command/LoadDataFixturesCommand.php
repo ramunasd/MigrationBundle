@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Command;
+namespace RDV\Bundle\MigrationBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,8 +10,7 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 
-use Oro\Bundle\MigrationBundle\Migration\Loader\DataFixturesLoader;
-use Oro\Bundle\SearchBundle\EventListener\OrmIndexListener;
+use RDV\Bundle\MigrationBundle\Migration\Loader\DataFixturesLoader;
 
 class LoadDataFixturesCommand extends ContainerAwareCommand
 {
@@ -26,7 +25,7 @@ class LoadDataFixturesCommand extends ContainerAwareCommand
      */
     protected function configure()
     {
-        $this->setName('oro:migration:data:load')
+        $this->setName('rdv:migration:data:load')
             ->setDescription('Load data fixtures.')
             ->addOption(
                 'fixtures-type',
@@ -62,7 +61,7 @@ class LoadDataFixturesCommand extends ContainerAwareCommand
     {
         $fixtures = null;
         try {
-            $fixtures = $this->getFixtures($input, $output);
+            $fixtures = $this->getFixtures($input);
         } catch (\RuntimeException $ex) {
             $output->writeln('');
             $output->writeln(sprintf('<error>%s</error>', $ex->getMessage()));
@@ -83,14 +82,13 @@ class LoadDataFixturesCommand extends ContainerAwareCommand
 
     /**
      * @param InputInterface  $input
-     * @param OutputInterface $output
      * @return array
      * @throws \RuntimeException if loading of data fixtures should be terminated
      */
-    protected function getFixtures(InputInterface $input, OutputInterface $output)
+    protected function getFixtures(InputInterface $input)
     {
         /** @var DataFixturesLoader $loader */
-        $loader              = $this->getContainer()->get('oro_migration.data_fixtures.loader');
+        $loader              = $this->getContainer()->get('rdv_migration.data_fixtures.loader');
         $bundles             = $input->getOption('bundles');
         $excludeBundles      = $input->getOption('exclude');
         $fixtureRelativePath = $this->getFixtureRelativePath($input);

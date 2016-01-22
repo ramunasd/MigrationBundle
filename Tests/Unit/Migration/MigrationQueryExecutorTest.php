@@ -1,8 +1,8 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Migration;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Migration;
 
-use Oro\Bundle\MigrationBundle\Migration\MigrationQueryExecutor;
+use RDV\Bundle\MigrationBundle\Migration\MigrationQueryExecutor;
 
 class MigrationQueryExecutorTest extends \PHPUnit_Framework_TestCase
 {
@@ -59,7 +59,7 @@ class MigrationQueryExecutorTest extends \PHPUnit_Framework_TestCase
 
     public function testExecuteMigrationQuery()
     {
-        $query = $this->getMock('Oro\Bundle\MigrationBundle\Migration\MigrationQuery');
+        $query = $this->getMock('RDV\Bundle\MigrationBundle\Migration\MigrationQuery');
 
         $query->expects($this->never())
             ->method('setConnection');
@@ -72,7 +72,7 @@ class MigrationQueryExecutorTest extends \PHPUnit_Framework_TestCase
 
     public function testExecuteConnectionAwareMigrationQuery()
     {
-        $query = $this->getMockBuilder('Oro\Bundle\MigrationBundle\Migration\ParametrizedMigrationQuery')
+        $query = $this->getMockBuilder('RDV\Bundle\MigrationBundle\Migration\ParametrizedMigrationQuery')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -90,7 +90,7 @@ class MigrationQueryExecutorTest extends \PHPUnit_Framework_TestCase
     {
         $queryDescription = 'test query';
 
-        $query = $this->getMock('Oro\Bundle\MigrationBundle\Migration\MigrationQuery');
+        $query = $this->getMock('RDV\Bundle\MigrationBundle\Migration\MigrationQuery');
 
         $query->expects($this->once())
             ->method('getDescription')
@@ -110,7 +110,7 @@ class MigrationQueryExecutorTest extends \PHPUnit_Framework_TestCase
     {
         $queryDescription = ['test query 1', 'test query 2'];
 
-        $query = $this->getMock('Oro\Bundle\MigrationBundle\Migration\MigrationQuery');
+        $query = $this->getMock('RDV\Bundle\MigrationBundle\Migration\MigrationQuery');
 
         $query->expects($this->once())
             ->method('getDescription')
@@ -133,7 +133,7 @@ class MigrationQueryExecutorTest extends \PHPUnit_Framework_TestCase
     {
         $queryDescription = null;
 
-        $query = $this->getMock('Oro\Bundle\MigrationBundle\Migration\MigrationQuery');
+        $query = $this->getMock('RDV\Bundle\MigrationBundle\Migration\MigrationQuery');
 
         $query->expects($this->once())
             ->method('getDescription')

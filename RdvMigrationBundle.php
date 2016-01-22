@@ -1,13 +1,13 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle;
+namespace RDV\Bundle\MigrationBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-use Oro\Bundle\MigrationBundle\DependencyInjection\Compiler\MigrationExtensionPass;
+use RDV\Bundle\MigrationBundle\DependencyInjection\Compiler\MigrationExtensionPass;
 
-class OroMigrationBundle extends Bundle
+class RdvMigrationBundle extends Bundle
 {
     /**
      * {@inheritdoc}

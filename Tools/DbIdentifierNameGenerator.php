@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tools;
+namespace RDV\Bundle\MigrationBundle\Tools;
 
 class DbIdentifierNameGenerator
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Migration\Extension;
+namespace RDV\Bundle\MigrationBundle\Migration\Extension;
 
-use Oro\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
+use RDV\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
 
 /**
  * NameGeneratorAwareInterface should be implemented by extensions that depends on a database identifier name generator.

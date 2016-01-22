@@ -1,12 +1,12 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Migration\Loader;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Migration\Loader;
 
-use Oro\Bundle\MigrationBundle\Entity\DataFixture;
-use Oro\Bundle\MigrationBundle\Migration\Loader\DataFixturesLoader;
-use Oro\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test1Bundle\TestPackageTest1Bundle;
-use Oro\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test2Bundle\TestPackageTest2Bundle;
-use Oro\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test3Bundle\TestPackageTest3Bundle;
+use RDV\Bundle\MigrationBundle\Entity\DataFixture;
+use RDV\Bundle\MigrationBundle\Migration\Loader\DataFixturesLoader;
+use RDV\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test1Bundle\TestPackageTest1Bundle;
+use RDV\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test2Bundle\TestPackageTest2Bundle;
+use RDV\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test3Bundle\TestPackageTest3Bundle;
 
 class DataFixturesLoaderTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,7 +30,7 @@ class DataFixturesLoaderTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()->getMock();
         $this->em          = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()->getMock();
-        $this->em->expects($this->any())->method('getRepository')->with('OroMigrationBundle:DataFixture')
+        $this->em->expects($this->any())->method('getRepository')->with('MigrationBundle:DataFixture')
             ->willReturn($this->fixtureRepo);
 
         $this->loader = new DataFixturesLoader($this->em, $this->container);
@@ -87,9 +87,9 @@ class DataFixturesLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function getFixturesProvider()
     {
-        $test1BundleNamespace = 'Oro\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test1Bundle';
-        $test2BundleNamespace = 'Oro\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test2Bundle';
-        $test3BundleNamespace = 'Oro\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test3Bundle';
+        $test1BundleNamespace = 'RDV\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test1Bundle';
+        $test2BundleNamespace = 'RDV\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test2Bundle';
+        $test3BundleNamespace = 'RDV\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test3Bundle';
 
         return [
             [
@@ -102,7 +102,7 @@ class DataFixturesLoaderTest extends \PHPUnit_Framework_TestCase
                 [],
                 [
                     $test1BundleNamespace . '\Migrations\Data\ORM\LoadTest1BundleData',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
                 ]
             ],
             [
@@ -118,7 +118,7 @@ class DataFixturesLoaderTest extends \PHPUnit_Framework_TestCase
                 [
                     $test1BundleNamespace . '\Migrations\Data\ORM\LoadTest1BundleData',
                     $test2BundleNamespace . '\Migrations\Data\ORM\LoadTest2BundleData',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
                 ]
             ],
             [
@@ -128,7 +128,7 @@ class DataFixturesLoaderTest extends \PHPUnit_Framework_TestCase
                 ],
                 [
                     $test2BundleNamespace . '\Migrations\Data\ORM\LoadTest2BundleData',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
                 ]
             ],
             [
@@ -137,7 +137,7 @@ class DataFixturesLoaderTest extends \PHPUnit_Framework_TestCase
                 [
                     $test1BundleNamespace . '\Migrations\Data\ORM\LoadTest1BundleData',
                     $test2BundleNamespace . '\Migrations\Data\ORM\LoadTest2BundleData',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
                 ]
             ],
             [
@@ -147,7 +147,7 @@ class DataFixturesLoaderTest extends \PHPUnit_Framework_TestCase
                 ],
                 [
                     $test1BundleNamespace . '\Migrations\Data\ORM\LoadTest1BundleData',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
                 ]
             ],
             [
@@ -156,7 +156,7 @@ class DataFixturesLoaderTest extends \PHPUnit_Framework_TestCase
                 [
                     $test3BundleNamespace . '\Migrations\Data\ORM\LoadTest3BundleData1',
                     $test3BundleNamespace . '\Migrations\Data\ORM\LoadTest3BundleData2',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
                 ]
             ],
             [
@@ -167,7 +167,7 @@ class DataFixturesLoaderTest extends \PHPUnit_Framework_TestCase
                 ],
                 [
                     $test3BundleNamespace . '\Migrations\Data\ORM\LoadTest3BundleData2',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture',
                 ]
             ],
             [

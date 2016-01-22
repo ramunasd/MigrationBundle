@@ -1,11 +1,9 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Migration;
+namespace RDV\Bundle\MigrationBundle\Migration;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\ORM\Query\Expr;
-
-use Oro\Bundle\MigrationBundle\Migrations\Schema\v1_0\OroMigrationBundle as MigrationBundleMigration10;
 
 class ReleaseDataFixtureMigration implements Migration
 {
@@ -79,7 +77,7 @@ class ReleaseDataFixtureMigration implements Migration
 
         return sprintf(
             'INSERT INTO %s SET %s, %s',
-            MigrationBundleMigration10::MIGRATION_DATA_TABLE,
+            Tables::MIGRATION_DATA_TABLE,
             $this->expr()->eq('class_name', $this->expr()->literal(addslashes($dataFixture))),
             $this->expr()->eq('loaded_at', $this->expr()->literal($createdAt->format('Y-m-d H:i:s')))
         );

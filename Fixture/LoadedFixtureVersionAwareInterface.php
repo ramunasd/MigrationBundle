@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Fixture;
+namespace RDV\Bundle\MigrationBundle\Fixture;
 
 interface LoadedFixtureVersionAwareInterface
 {

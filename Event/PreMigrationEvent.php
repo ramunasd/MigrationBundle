@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Event;
+namespace RDV\Bundle\MigrationBundle\Event;
 
 class PreMigrationEvent extends MigrationEvent
 {

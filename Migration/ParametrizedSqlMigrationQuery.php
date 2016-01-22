@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Migration;
+namespace RDV\Bundle\MigrationBundle\Migration;
 
 use Psr\Log\LoggerInterface;
 

@@ -1,12 +1,12 @@
 <?php
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test3Bundle\Migrations\Data\ORM;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test3Bundle\Migrations\Data\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Oro\Bundle\MigrationBundle\Fixture\LoadedFixtureVersionAwareInterface;
-use Oro\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
+use RDV\Bundle\MigrationBundle\Fixture\LoadedFixtureVersionAwareInterface;
+use RDV\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
 
 class LoadTest3BundleData2 extends AbstractFixture implements
     VersionedFixtureInterface,

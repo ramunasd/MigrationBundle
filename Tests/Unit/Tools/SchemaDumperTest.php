@@ -1,9 +1,9 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Tools;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Tools;
 
 use Doctrine\DBAL\Schema\Schema;
-use Oro\Bundle\MigrationBundle\Tools\SchemaDumper;
+use RDV\Bundle\MigrationBundle\Tools\SchemaDumper;
 
 class SchemaDumperTest extends \PHPUnit_Framework_TestCase
 {

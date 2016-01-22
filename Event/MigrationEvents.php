@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Event;
+namespace RDV\Bundle\MigrationBundle\Event;
 
 class MigrationEvents
 {
@@ -10,7 +10,7 @@ class MigrationEvents
      *
      * @var string
      */
-    const PRE_UP = 'oro_migration.pre_up';
+    const PRE_UP = 'rdv_migration.pre_up';
 
     /**
      * This event is raised after a list of migrations are built.
@@ -18,5 +18,5 @@ class MigrationEvents
      *
      * @var string
      */
-    const POST_UP = 'oro_migration.post_up';
+    const POST_UP = 'rdv_migration.post_up';
 }

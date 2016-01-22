@@ -1,12 +1,12 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Entity;
+namespace RDV\Bundle\MigrationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table("oro_migrations", indexes={
- *     @ORM\Index(name="idx_oro_migrations", columns={"bundle"})
+ * @ORM\Table("rdv_migrations", indexes={
+ *     @ORM\Index(name="idx_rdv_migrations", columns={"bundle"})
  * })
  * @ORM\Entity()
  */

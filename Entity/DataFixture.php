@@ -1,12 +1,12 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Entity;
+namespace RDV\Bundle\MigrationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table("oro_migrations_data")
- * @ORM\Entity(repositoryClass="Oro\Bundle\MigrationBundle\Entity\Repository\DataFixtureRepository")
+ * @ORM\Table("rdv_migrations_data")
+ * @ORM\Entity(repositoryClass="RDV\Bundle\MigrationBundle\Entity\Repository\DataFixtureRepository")
  */
 class DataFixture
 {

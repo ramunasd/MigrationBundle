@@ -1,8 +1,8 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Migration\Schema;
+namespace RDV\Bundle\MigrationBundle\Migration\Schema;
 
-use Oro\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
+use RDV\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
 
 class TableWithNameGenerator extends Table
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Migration\Loader;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Migration\Loader;
 
-use Oro\Bundle\MigrationBundle\Event\MigrationEvents;
-use Oro\Bundle\MigrationBundle\Event\PreMigrationEvent;
-use Oro\Bundle\MigrationBundle\Migration\MigrationState;
-use Oro\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test1Bundle\TestPackageTest1Bundle;
-use Oro\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test2Bundle\TestPackageTest2Bundle;
+use RDV\Bundle\MigrationBundle\Event\MigrationEvents;
+use RDV\Bundle\MigrationBundle\Event\PreMigrationEvent;
+use RDV\Bundle\MigrationBundle\Migration\MigrationState;
+use RDV\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test1Bundle\TestPackageTest1Bundle;
+use RDV\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test2Bundle\TestPackageTest2Bundle;
 
-use Oro\Bundle\MigrationBundle\Migration\Loader\MigrationsLoader;
+use RDV\Bundle\MigrationBundle\Migration\Loader\MigrationsLoader;
 
 class MigrationsLoaderTest extends \PHPUnit_Framework_TestCase
 {
@@ -108,7 +108,7 @@ class MigrationsLoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function getMigrationsProvider()
     {
-        $testPackage = 'Oro\\Bundle\\MigrationBundle\\Tests\\Unit\\Fixture\\TestPackage\\';
+        $testPackage = 'RDV\\Bundle\\MigrationBundle\\Tests\\Unit\\Fixture\\TestPackage\\';
         $test1Bundle = $testPackage . 'Test1Bundle\\Migrations\\Schema';
         $test2Bundle = $testPackage . 'Test2Bundle\\Migrations\\Schema';
 
@@ -123,7 +123,7 @@ class MigrationsLoaderTest extends \PHPUnit_Framework_TestCase
                     $test2Bundle . '\v1_0\Test2BundleMigration11',
                     $test2Bundle . '\v1_1\Test2BundleMigration12',
                     $test2Bundle . '\v1_1\Test2BundleMigration11',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
                 ]
             ],
             [
@@ -136,7 +136,7 @@ class MigrationsLoaderTest extends \PHPUnit_Framework_TestCase
                     $test2Bundle . '\v1_1\Test2BundleMigration11',
                     $test1Bundle . '\Test1BundleInstallation',
                     $test1Bundle . '\v1_1\Test1BundleMigration11',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
                 ]
             ],
             [
@@ -149,7 +149,7 @@ class MigrationsLoaderTest extends \PHPUnit_Framework_TestCase
                     $test2Bundle . '\v1_0\Test2BundleMigration11',
                     $test2Bundle . '\v1_1\Test2BundleMigration12',
                     $test2Bundle . '\v1_1\Test2BundleMigration11',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
                 ]
             ],
             [
@@ -164,7 +164,7 @@ class MigrationsLoaderTest extends \PHPUnit_Framework_TestCase
                     $test2Bundle . '\v1_0\Test2BundleMigration11',
                     $test2Bundle . '\v1_1\Test2BundleMigration12',
                     $test2Bundle . '\v1_1\Test2BundleMigration11',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
                 ]
             ],
             [
@@ -178,7 +178,7 @@ class MigrationsLoaderTest extends \PHPUnit_Framework_TestCase
                     $test2Bundle . '\v1_0\Test2BundleMigration11',
                     $test2Bundle . '\v1_1\Test2BundleMigration12',
                     $test2Bundle . '\v1_1\Test2BundleMigration11',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
                 ]
             ],
             [
@@ -191,7 +191,7 @@ class MigrationsLoaderTest extends \PHPUnit_Framework_TestCase
                     $test1Bundle . '\v1_1\Test1BundleMigration11',
                     $test2Bundle . '\v1_1\Test2BundleMigration12',
                     $test2Bundle . '\v1_1\Test2BundleMigration11',
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
                 ]
             ],
             [
@@ -201,7 +201,7 @@ class MigrationsLoaderTest extends \PHPUnit_Framework_TestCase
                     ['bundle' => 'TestPackageTest2Bundle', 'version' => 'v1_1'],
                 ],
                 [
-                    'Oro\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
+                    'RDV\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration',
                 ]
             ],
         ];

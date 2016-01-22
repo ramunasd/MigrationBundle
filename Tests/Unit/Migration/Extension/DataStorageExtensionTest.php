@@ -1,15 +1,15 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Migration\Extension;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Migration\Extension;
 
-use Oro\Bundle\MigrationBundle\Migration\Extension\DataStorageExtension;
+use RDV\Bundle\MigrationBundle\Migration\Extension\DataStorageExtension;
 
 class DataStorageExtensionTest extends \PHPUnit_Framework_TestCase
 {
     public function testGet()
     {
         $dataStorage = new DataStorageExtension();
-        $dataStorage->put('test', ['test1' => 'test1']);
+        $dataStorage->set('test', ['test1' => 'test1']);
 
         $this->assertEquals(
             $dataStorage->get('test'),
@@ -22,7 +22,7 @@ class DataStorageExtensionTest extends \PHPUnit_Framework_TestCase
     public function testHas()
     {
         $dataStorage = new DataStorageExtension();
-        $dataStorage->put('test', ['test1' => 'test1']);
+        $dataStorage->set('test', ['test1' => 'test1']);
 
         $this->assertTrue($dataStorage->has('test'));
     }

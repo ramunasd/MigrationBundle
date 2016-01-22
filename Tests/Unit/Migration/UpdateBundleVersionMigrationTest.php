@@ -1,12 +1,12 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Migration;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Migration;
 
 use Doctrine\DBAL\Schema\Schema;
-use Oro\Bundle\MigrationBundle\Migration\CreateMigrationTableMigration;
-use Oro\Bundle\MigrationBundle\Migration\MigrationState;
-use Oro\Bundle\MigrationBundle\Migration\QueryBag;
-use Oro\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration;
+use RDV\Bundle\MigrationBundle\Migration\MigrationState;
+use RDV\Bundle\MigrationBundle\Migration\QueryBag;
+use RDV\Bundle\MigrationBundle\Migration\Tables;
+use RDV\Bundle\MigrationBundle\Migration\UpdateBundleVersionMigration;
 
 class UpdateBundleVersionMigrationTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,7 +23,7 @@ class UpdateBundleVersionMigrationTest extends \PHPUnit_Framework_TestCase
         foreach ($expectedUpdates as $bundleName => $version) {
             $assertQueries[] = sprintf(
                 "INSERT INTO %s (bundle, version, loaded_at) VALUES ('%s', '%s',",
-                CreateMigrationTableMigration::MIGRATION_TABLE,
+                Tables::MIGRATION_TABLE,
                 $bundleName,
                 $version
             );
@@ -99,7 +99,7 @@ class UpdateBundleVersionMigrationTest extends \PHPUnit_Framework_TestCase
     protected function getMigration($bundleName, $version, $state = true)
     {
         $migration = new MigrationState(
-            $this->getMock('Oro\Bundle\MigrationBundle\Migration\Migration'),
+            $this->getMock('RDV\Bundle\MigrationBundle\Migration\Migration'),
             $bundleName,
             $version
         );

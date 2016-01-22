@@ -1,8 +1,8 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Event;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Event;
 
-use Oro\Bundle\MigrationBundle\Event\MigrationEvent;
+use RDV\Bundle\MigrationBundle\Event\MigrationEvent;
 
 class MigrationEventTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,6 +11,7 @@ class MigrationEventTest extends \PHPUnit_Framework_TestCase
      */
     protected $migrationEvent;
 
+    /** @var \PHPUnit_Framework_MockObject_MockObject */
     protected $connection;
 
     protected function setUp()
@@ -23,11 +24,11 @@ class MigrationEventTest extends \PHPUnit_Framework_TestCase
 
     public function testMigrationData()
     {
-        $middleMigration = $this->getMockForAbstractClass('Oro\Bundle\MigrationBundle\Migration\Migration');
+        $middleMigration = $this->getMockForAbstractClass('RDV\Bundle\MigrationBundle\Migration\Migration');
         $this->migrationEvent->addMigration($middleMigration);
-        $firstMigration = $this->getMockForAbstractClass('Oro\Bundle\MigrationBundle\Migration\Migration');
+        $firstMigration = $this->getMockForAbstractClass('RDV\Bundle\MigrationBundle\Migration\Migration');
         $this->migrationEvent->addMigration($firstMigration, true);
-        $lastMigration = $this->getMockForAbstractClass('Oro\Bundle\MigrationBundle\Migration\Migration');
+        $lastMigration = $this->getMockForAbstractClass('RDV\Bundle\MigrationBundle\Migration\Migration');
         $this->migrationEvent->addMigration($lastMigration);
 
         $migrations = $this->migrationEvent->getMigrations();

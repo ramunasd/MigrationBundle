@@ -1,15 +1,15 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Migration\Schema;
+namespace RDV\Bundle\MigrationBundle\Migration\Schema;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Schema\SchemaConfig;
 use Doctrine\DBAL\Schema\Sequence;
-use Oro\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
+use RDV\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
 
 class SchemaWithNameGenerator extends Schema
 {
-    const TABLE_CLASS = 'Oro\Bundle\MigrationBundle\Migration\Schema\TableWithNameGenerator';
+    const TABLE_CLASS = 'RDV\Bundle\MigrationBundle\Migration\Schema\TableWithNameGenerator';
 
     /**
      * @var DbIdentifierNameGenerator

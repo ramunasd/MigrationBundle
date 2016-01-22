@@ -1,11 +1,11 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Tools;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Tools;
 
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Types\Type;
-use Oro\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
+use RDV\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
 
 class DbIdentifierNameGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -171,8 +171,8 @@ class DbIdentifierNameGeneratorTest extends \PHPUnit_Framework_TestCase
             [
                 ['table1', 'table2'],
                 ['column1', 'column2'],
-                'OroCRM',
-                'orocrm_1c95229d859c7327341ce00',
+                'system',
+                'system_1c95229d859c7327341ce00',
                 false
             ],
             [

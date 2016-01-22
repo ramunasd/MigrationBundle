@@ -1,11 +1,11 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Tools;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Tools;
 
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Types\Type;
 
-use Oro\Bundle\MigrationBundle\Twig\SchemaDumperExtension;
+use RDV\Bundle\MigrationBundle\Twig\SchemaDumperExtension;
 
 class SchemaDumperExtensionTest extends \PHPUnit_Framework_TestCase
 {

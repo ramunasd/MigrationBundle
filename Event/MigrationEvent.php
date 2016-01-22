@@ -1,13 +1,13 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Event;
+namespace RDV\Bundle\MigrationBundle\Event;
 
 use Doctrine\DBAL\Connection;
 
+use Doctrine\DBAL\DBALException;
 use Symfony\Component\EventDispatcher\Event;
 
-use Oro\Bundle\EntityBundle\Tools\SafeDatabaseChecker;
-use Oro\Bundle\MigrationBundle\Migration\Migration;
+use RDV\Bundle\MigrationBundle\Migration\Migration;
 
 class MigrationEvent extends Event
 {
@@ -77,6 +77,15 @@ class MigrationEvent extends Event
      */
     public function isTableExist($tableName)
     {
-        return SafeDatabaseChecker::tablesExist($this->connection, $tableName);
+        if (!empty($tableName)) {
+            try {
+                $this->connection->connect();
+                return $this->connection->getSchemaManager()->tablesExist($tableName);
+            } catch (\PDOException $e) {
+            } catch (DBALException $e) {
+            }
+        }
+
+        return false;
     }
 }

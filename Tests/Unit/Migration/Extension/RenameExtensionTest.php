@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Migration\Extension;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Migration\Extension;
 
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Platforms\OraclePlatform;
@@ -10,10 +10,10 @@ use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Types\Type;
-use Oro\Bundle\MigrationBundle\Migration\Extension\RenameExtension;
-use Oro\Bundle\MigrationBundle\Migration\MigrationQuery;
-use Oro\Bundle\MigrationBundle\Migration\QueryBag;
-use Oro\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
+use RDV\Bundle\MigrationBundle\Migration\Extension\RenameExtension;
+use RDV\Bundle\MigrationBundle\Migration\MigrationQuery;
+use RDV\Bundle\MigrationBundle\Migration\QueryBag;
+use RDV\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
 
 class RenameExtensionTest extends \PHPUnit_Framework_TestCase
 {

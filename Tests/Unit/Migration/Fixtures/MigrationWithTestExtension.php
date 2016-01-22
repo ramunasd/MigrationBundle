@@ -1,16 +1,16 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Migration\Fixtures;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Migration\Fixtures;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Oro\Bundle\MigrationBundle\Migration\Migration;
-use Oro\Bundle\MigrationBundle\Migration\QueryBag;
-use Oro\Bundle\MigrationBundle\Migration\Extension\DatabasePlatformAwareInterface;
-use Oro\Bundle\MigrationBundle\Migration\Extension\NameGeneratorAwareInterface;
-use Oro\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
-use Oro\Bundle\MigrationBundle\Tests\Unit\Migration\Fixtures\Extension\TestExtension;
-use Oro\Bundle\MigrationBundle\Tests\Unit\Migration\Fixtures\Extension\TestExtensionAwareInterface;
+use RDV\Bundle\MigrationBundle\Migration\Migration;
+use RDV\Bundle\MigrationBundle\Migration\QueryBag;
+use RDV\Bundle\MigrationBundle\Migration\Extension\DatabasePlatformAwareInterface;
+use RDV\Bundle\MigrationBundle\Migration\Extension\NameGeneratorAwareInterface;
+use RDV\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator;
+use RDV\Bundle\MigrationBundle\Tests\Unit\Migration\Fixtures\Extension\TestExtension;
+use RDV\Bundle\MigrationBundle\Tests\Unit\Migration\Fixtures\Extension\TestExtensionAwareInterface;
 
 class MigrationWithTestExtension implements
     Migration,

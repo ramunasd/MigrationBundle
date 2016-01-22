@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test3Bundle;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage\Test3Bundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Fixture\TestPackage;
 
 use Doctrine\DBAL\Schema\Schema;
-use Oro\Bundle\MigrationBundle\Migration\Migration;
-use Oro\Bundle\MigrationBundle\Migration\QueryBag;
+use RDV\Bundle\MigrationBundle\Migration\Migration;
+use RDV\Bundle\MigrationBundle\Migration\QueryBag;
 
 class WrongTableNameMigration implements Migration
 {

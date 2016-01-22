@@ -1,25 +1,26 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Command;
+namespace RDV\Bundle\MigrationBundle\Command;
 
+use RDV\Bundle\MigrationBundle\Log\OutputLogger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use Oro\Component\Log\OutputLogger;
-use Oro\Bundle\EntityConfigBundle\Tools\CommandExecutor;
-use Oro\Bundle\MigrationBundle\Migration\Loader\MigrationsLoader;
-use Oro\Bundle\MigrationBundle\Migration\MigrationExecutor;
+use RDV\Bundle\MigrationBundle\Migration\Loader\MigrationsLoader;
+use RDV\Bundle\MigrationBundle\Migration\MigrationExecutor;
 
 class LoadMigrationsCommand extends ContainerAwareCommand
 {
+    const DEFAULT_TIMEOUT = 60;
+
     /**
      * @inheritdoc
      */
     protected function configure()
     {
-        $this->setName('oro:migration:load')
+        $this->setName('rdv:migration:load')
             ->setDescription('Execute migration scripts.')
             ->addOption(
                 'force',
@@ -56,7 +57,7 @@ class LoadMigrationsCommand extends ContainerAwareCommand
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'Timeout for child command execution',
-                CommandExecutor::DEFAULT_TIMEOUT
+                self::DEFAULT_TIMEOUT
             );
     }
 
@@ -67,7 +68,6 @@ class LoadMigrationsCommand extends ContainerAwareCommand
     {
         $force = $input->getOption('force');
         $dryRun = $input->getOption('dry-run');
-        $this->initCommandExecutor($input);
 
         if ($force || $dryRun) {
             $output->writeln($dryRun ? 'List of migrations:' : 'Process migrations...');
@@ -87,7 +87,7 @@ class LoadMigrationsCommand extends ContainerAwareCommand
                         $input->getOption('show-queries') ? null : OutputInterface::VERBOSITY_QUIET,
                         '    '
                     );
-                    $executor    = $this->getMigrationExecutor($input);
+                    $executor    = $this->getMigrationExecutor();
                     $executor->setLogger($logger);
                     $executor->getQueryExecutor()->setLogger($queryLogger);
                     $executor->executeUp($migrations, $input->getOption('dry-run'));
@@ -109,7 +109,7 @@ class LoadMigrationsCommand extends ContainerAwareCommand
      */
     protected function getMigrationLoader(InputInterface $input)
     {
-        $migrationLoader = $this->getContainer()->get('oro_migration.migrations.loader');
+        $migrationLoader = $this->getContainer()->get('rdv_migration.migrations.loader');
         $bundles         = $input->getOption('bundles');
         if (!empty($bundles)) {
             $migrationLoader->setBundles($bundles);
@@ -123,28 +123,10 @@ class LoadMigrationsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param InputInterface $input
      * @return MigrationExecutor
      */
-    protected function getMigrationExecutor(InputInterface $input)
+    protected function getMigrationExecutor()
     {
-        return $this->getContainer()->get('oro_migration.migrations.executor');
-    }
-
-    /**
-     * @param InputInterface $input
-     */
-    protected function initCommandExecutor(InputInterface $input)
-    {
-        /** @var CommandExecutor $commandExecutor */
-        $commandExecutor = $this->getContainer()->get('oro_entity_config.tools.command_executor');
-
-        $timeout = $input->getOption('timeout');
-        if ($timeout >= 0) {
-            $commandExecutor->setDefaultOption('process-timeout', $timeout);
-        }
-        if (true === $input->getOption('no-debug')) {
-            $commandExecutor->setDefaultOption('no-debug');
-        }
+        return $this->getContainer()->get('rdv_migration.migrations.executor');
     }
 }

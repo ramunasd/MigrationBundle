@@ -1,13 +1,11 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Twig;
+namespace RDV\Bundle\MigrationBundle\Twig;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Types\Type;
-
-use Oro\Bundle\EntityConfigBundle\Config\ConfigManager;
 
 class SchemaDumperExtension extends \Twig_Extension
 {
@@ -15,11 +13,6 @@ class SchemaDumperExtension extends \Twig_Extension
      * @var ManagerRegistry
      */
     protected $managerRegistry;
-
-    /**
-     * @var ConfigManager
-     */
-    protected $configManager;
 
     /**
      * @var AbstractPlatform
@@ -72,7 +65,7 @@ class SchemaDumperExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'oro_migration_get_schema_column_options' => new \Twig_Function_Method($this, 'getColumnOptions'),
+            'rdv_migration_get_schema_column_options' => new \Twig_Function_Method($this, 'getColumnOptions'),
         );
     }
 

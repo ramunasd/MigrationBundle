@@ -1,8 +1,8 @@
 <?php
 
-namespace Oro\Bundle\MigrationBundle\Tests\Unit\Entity;
+namespace RDV\Bundle\MigrationBundle\Tests\Unit\Entity;
 
-use Oro\Bundle\MigrationBundle\Entity\DataFixture;
+use RDV\Bundle\MigrationBundle\Entity\DataFixture;
 
 class DataFixtureTest extends \PHPUnit_Framework_TestCase
 {
