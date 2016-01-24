@@ -81,7 +81,7 @@ class DataFixturesLoader extends ContainerAwareLoader
         if (empty($this->loadedFixtures)) {
             $this->loadedFixtures = [];
 
-            $loadedFixtures = $this->em->getRepository('MigrationBundle:DataFixture')->findAll();
+            $loadedFixtures = $this->em->getRepository('RdvMigrationBundle:DataFixture')->findAll();
             /** @var DataFixture $fixture */
             foreach ($loadedFixtures as $fixture) {
                 $this->loadedFixtures[$fixture->getClassName()] = $fixture->getVersion() ?: '0.0';

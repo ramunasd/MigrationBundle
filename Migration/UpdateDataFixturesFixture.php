@@ -37,7 +37,7 @@ class UpdateDataFixturesFixture extends AbstractFixture
                 $dataFixture = null;
                 if ($version !== null) {
                     $dataFixture = $manager
-                        ->getRepository('MigrationBundle:DataFixture')
+                        ->getRepository('RdvMigrationBundle:DataFixture')
                         ->findOneBy(['className' => $className]);
                 }
                 if (!$dataFixture) {

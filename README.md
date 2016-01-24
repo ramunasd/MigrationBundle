@@ -1,19 +1,57 @@
 MigrationBundle
 ==================
 
+[![Build Status](https://travis-ci.org/ramunasd/MigrationBundle.svg)](https://travis-ci.org/ramunasd/MigrationBundle)
+[![Scrutinizer](https://scrutinizer-ci.com/g/ramunasd/MigrationBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ramunasd/MigrationBundle/?branch=master)
+
 Doctrine based database schema and fixtures manipulator.
 
 
 Overview
 --------
 
-MigrationBundle is forked version of an open source [ORO platform migration bundle](https://github.com/orocrm/platform/tree/master/src/Oro/Bundle/MigrationBundle). ORO developers made a great tool, but they are not interested in contributions from community. That's why we forked this bundle and made it available for everyone. 
+MigrationBundle is forked version of an open source [ORO platform migration bundle](https://github.com/orocrm/platform/tree/master/src/Oro/Bundle/MigrationBundle). ORO developers made a great tool, but they are not interested in contributions from community. That's why we forked this bundle and made it available for everyone.
+ 
 
+Features
+--------
+
+ * Database agnostic migrations
+ * Semantic migration versions
+ * Versioned fixtures and sample data
+ * Automatic migration generation
+ * Custom extensions
 
 Installation
 ------------
 
+Add the bundle to your composer.json:
+
 ```composer require ramunasd/migration-bundle```
+
+
+Then add the bundle to your application kernel:
+
+```php
+// app/AppKernel.php
+<?php
+
+use Symfony\Component\HttpKernel\Kernel;
+
+class AppKernel extends Kernel
+{
+    public function registerBundles()
+    {
+        $bundles = array(
+            // ...
+            new Rdv\Bundle\MigrationBundle\RdvMigrationBundle(),
+        );
+    }
+
+    // ...
+}
+```
+
 
 Database structure migrations
 -----------------------------
@@ -156,13 +194,6 @@ Next algorithm may be used for new versions of your bundle:
  - Apply it with **rdv:migration:load**
  - Generate fresh installation file with **rdv:migration:dump**
  - If required - add migration extensions calls to generated installation.
-
-Examples of database structure migrations
------------------------------------------
-
- - [Simple migration](../UserBundle/Migrations/Schema/v1_0/OroUserBundle.php)
- - [Installer](../InstallerBundle/Migrations/Schema)
- - [Complex migration](../EntityConfigBundle/Migrations/Schema/v1_2)
 
 
 Extensions for database structure migrations

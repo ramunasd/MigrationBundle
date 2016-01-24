@@ -35,7 +35,7 @@ class DataFixtureRepository extends EntityRepository
     {
         $qb = $this->_em
             ->createQueryBuilder()
-            ->update('MigrationBundle:DataFixture', 'm')
+            ->update('RdvMigrationBundle:DataFixture', 'm')
             ->where($where);
 
         foreach ($updateFields as $fieldName => $fieldValue) {
