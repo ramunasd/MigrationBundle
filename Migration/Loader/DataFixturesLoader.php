@@ -3,15 +3,13 @@
 namespace RDV\Bundle\MigrationBundle\Migration\Loader;
 
 use Doctrine\ORM\EntityManager;
-
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
-
 use RDV\Bundle\MigrationBundle\Entity\DataFixture;
+use RDV\Bundle\MigrationBundle\Fixture\LoadedFixtureVersionAwareInterface;
+use RDV\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
 use RDV\Bundle\MigrationBundle\Migration\Sorter\DataFixturesSorter;
 use RDV\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture;
-use RDV\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
-use RDV\Bundle\MigrationBundle\Fixture\LoadedFixtureVersionAwareInterface;
+use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class DataFixturesLoader extends ContainerAwareLoader
 {
@@ -80,7 +78,7 @@ class DataFixturesLoader extends ContainerAwareLoader
      */
     protected function isFixtureAlreadyLoaded($fixtureObject)
     {
-        if (!$this->loadedFixtures) {
+        if (empty($this->loadedFixtures)) {
             $this->loadedFixtures = [];
 
             $loadedFixtures = $this->em->getRepository('MigrationBundle:DataFixture')->findAll();

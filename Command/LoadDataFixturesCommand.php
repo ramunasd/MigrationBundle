@@ -2,15 +2,13 @@
 
 namespace RDV\Bundle\MigrationBundle\Command;
 
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use RDV\Bundle\MigrationBundle\Migration\Loader\DataFixturesLoader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
-
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-
-use RDV\Bundle\MigrationBundle\Migration\Loader\DataFixturesLoader;
 
 class LoadDataFixturesCommand extends ContainerAwareCommand
 {

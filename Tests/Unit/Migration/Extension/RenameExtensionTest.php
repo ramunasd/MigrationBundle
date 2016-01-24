@@ -43,7 +43,7 @@ class RenameExtensionTest extends \PHPUnit_Framework_TestCase
         $extension = new RenameExtension();
         $extension->setDatabasePlatform($platform);
 
-        $schema  = new Schema(
+        $schema = new Schema(
             [
                 new Table(
                     'test_table',
@@ -58,7 +58,7 @@ class RenameExtensionTest extends \PHPUnit_Framework_TestCase
             ]
         );
         $queries = new QueryBag();
-        $table   = $schema->getTable('test_table');
+        $table = $schema->getTable('test_table');
 
         $extension->renameColumn($schema, $queries, $table, 'old_column', 'new_column');
         /** @var MigrationQuery $query */

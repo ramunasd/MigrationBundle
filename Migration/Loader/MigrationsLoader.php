@@ -49,7 +49,7 @@ class MigrationsLoader
     protected $eventDispatcher;
 
     /**
-     * @var string An array with already loaded bundle migration versions
+     * @var array An array with already loaded bundle migration versions
      *             key =   bundle name
      *             value = latest loaded version
      */
@@ -293,7 +293,7 @@ class MigrationsLoader
             if (isset($groupedMigrations[$bundleName])) {
                 foreach ($groupedMigrations[$bundleName] as $version => $versionedMigrations) {
                     foreach ($versionedMigrations as $migration) {
-                        $result[]  = new MigrationState(
+                        $result[] = new MigrationState(
                             $migration,
                             $bundleName,
                             $version
@@ -430,7 +430,7 @@ class MigrationsLoader
     {
         if (!empty($this->loadedVersions)) {
             foreach ($migrationDirectories as $bundleName => $bundleMigrationDirectories) {
-                $loadedVersion = isset($this->loadedVersions[$bundleName])
+                $loadedVersion = !empty($this->loadedVersions[$bundleName])
                     ? $this->loadedVersions[$bundleName]
                     : null;
                 if ($loadedVersion) {
@@ -453,7 +453,7 @@ class MigrationsLoader
         if (!empty($this->bundles)) {
             $includedBundles = [];
             foreach ($this->bundles as $bundleName) {
-                if (isset($bundles[$bundleName])) {
+                if (!empty($bundles[$bundleName])) {
                     $includedBundles[$bundleName] = $bundles[$bundleName];
                 }
             }

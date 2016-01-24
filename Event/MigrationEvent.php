@@ -3,11 +3,9 @@
 namespace RDV\Bundle\MigrationBundle\Event;
 
 use Doctrine\DBAL\Connection;
-
 use Doctrine\DBAL\DBALException;
-use Symfony\Component\EventDispatcher\Event;
-
 use RDV\Bundle\MigrationBundle\Migration\Migration;
+use Symfony\Component\EventDispatcher\Event;
 
 class MigrationEvent extends Event
 {
