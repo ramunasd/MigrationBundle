@@ -10,4 +10,11 @@ interface VersionedFixtureInterface
      * @return string
      */
     public function getVersion();
+
+    /**
+     * Set current loaded fixture version
+     *
+     * @param $version
+     */
+    public function setLoadedVersion($version = null);
 }

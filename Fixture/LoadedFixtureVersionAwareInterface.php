@@ -2,6 +2,9 @@
 
 namespace RDV\Bundle\MigrationBundle\Fixture;
 
+/**
+ * @deprecated interface VersionedFixtureInterface holds both methods - getVersion() and setLoadedVersion()
+ */
 interface LoadedFixtureVersionAwareInterface
 {
     /**

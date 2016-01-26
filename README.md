@@ -18,9 +18,11 @@ Features
 
  * Database agnostic migrations
  * Semantic migration versions
+ * Fast installation to latest version
+ * Automatic installer generation
  * Versioned fixtures and sample data
- * Automatic migration generation
  * Custom extensions
+ * Migration hooks
 
 Installation
 ------------
@@ -198,7 +200,7 @@ Next algorithm may be used for new versions of your bundle:
 
 Extensions for database structure migrations
 --------------------------------------------
-Sometime you cannot use standard Doctrime methods for database structure modification. For example `Schema::renameTable` does not work because it drops existing table and then creates a new table. To help you to manage such case and allow to add some useful functionality to any migration a extensions mechanism was designed. The following example shows how [RenameExtension][5] can be used:
+Sometime you cannot use standard Doctrine methods for database structure modification. For example `Schema::renameTable` does not work because it drops existing table and then creates a new table. To help you to manage such case and allow to add some useful functionality to any migration a extensions mechanism was designed. The following example shows how [RenameExtension][5] can be used:
 ``` php
 <?php
 
@@ -270,7 +272,7 @@ class MyExtension
     }
 }
 ```
- - Create `*AwareInterface` in the same namespase. It is important that the interface name should be `{ExtensionClass}AwareInterface` and set method should be `set{ExtensionClass}({ExtensionClass} ${extensionName})`. For example:
+ - Create `*AwareInterface` in the same namespace. It is important that the interface name should be `{ExtensionClass}AwareInterface` and set method should be `set{ExtensionClass}({ExtensionClass} ${extensionName})`. For example:
 ``` php
 <?php
 
@@ -322,15 +324,16 @@ Versioned fixtures
 
 There are fixtures which need to be executed time after time. An example is a fixture which uploads countries data. Usually, if you add new countries list, you need to create new data fixture which will upload this data. To avoid this you can use versioned data fixtures.
 
-To make fixture versioned, this fixture must implement [VersionedFixtureInterface](./Fixture/VersionedFixtureInterface.php) and `getVersion` method which returns a version of fixture data.
+To make fixture versioned, this fixture must implement [VersionedFixtureInterface](./Fixture/VersionedFixtureInterface.php). Method `getVersion` returns a version of fixture data and `getLoadedVersion` a version of currently loaded fixture.
 
 Example:
+
 
 ``` php
 
 <?php
 
-namespace Acme\DemoBundle\Migrations\DataFixtures\ORM;
+namespace Acme\DemoBundle\Migrations\Data\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -340,11 +343,24 @@ use RDV\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
 class LoadSomeDataFixture extends AbstractFixture implements VersionedFixtureInterface
 {
     /**
+     * @var string
+     */
+    protected $loadedVersion;
+    
+    /**
      * {@inheritdoc}
      */
     public function getVersion()
     {
         return '1.0';
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setLoadedVersion($version = null)
+    {
+        $this->loadedVersion = $version;
     }
 
     /**
@@ -353,6 +369,9 @@ class LoadSomeDataFixture extends AbstractFixture implements VersionedFixtureInt
     public function load(ObjectManager $manager)
     {
         // Here we can use fixture data code which will be run time after time
+        
+        if ($this->loadedVersion === null) { // loadedVersion is null for first time
+        }
     }
 }
 ```
@@ -360,53 +379,6 @@ class LoadSomeDataFixture extends AbstractFixture implements VersionedFixtureInt
 In this example, if the fixture was not loaded yet, it will be loaded and version 1.0 will be saved as current loaded version of this fixture.
 
 To have possibility to load this fixture again, the fixture must return a version greater then 1.0, for example 1.0.1 or 1.1. A version number must be an PHP-standardized version number string. More info about PHP-standardized version number string can be found in [PHP manual][1].
-
-If a fixture need to know the last loaded version, it must implement [LoadedFixtureVersionAwareInterface](./Fixture/LoadedFixtureVersionAwareInterface.php) and `setLoadedVersion` method:
-
-``` php
-<?php
-
-namespace Acme\DemoBundle\Migrations\DataFixtures\ORM;
-
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\Persistence\ObjectManager;
-
-use RDV\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
-use RDV\Bundle\MigrationBundle\Fixture\RequestVersionFixtureInterface;
-
-class LoadSomeDataFixture extends AbstractFixture implements VersionedFixtureInterface, LoadedFixtureVersionAwareInterface
-{
-    /**
-     * @var $currendDBVersion string
-     */
-    protected $currendDBVersion = null;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLoadedVersion($version = null)
-    {
-        $this->currendDBVersion = $version;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getVersion()
-    {
-        return '2.0';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function load(ObjectManager $manager)
-    {
-        // Here we can check last loaded version and load data data difference between last
-        // uploaded version and current version
-    }
-}
-```
 
   [1]: http://php.net/manual/en/function.version-compare.php
   [2]: https://github.com/doctrine/data-fixtures#fixture-ordering

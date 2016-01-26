@@ -5,12 +5,10 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use RDV\Bundle\MigrationBundle\Fixture\LoadedFixtureVersionAwareInterface;
 use RDV\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
 
 class LoadTest3BundleData2 extends AbstractFixture implements
     VersionedFixtureInterface,
-    LoadedFixtureVersionAwareInterface,
     OrderedFixtureInterface
 {
     public $dbVersion;

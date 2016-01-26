@@ -17,6 +17,10 @@ class LoadTest3BundleData1 extends AbstractFixture implements VersionedFixtureIn
         return '1.0';
     }
 
+    public function setLoadedVersion($version = null)
+    {
+    }
+
     /**
      * {@inheritdoc}
      */

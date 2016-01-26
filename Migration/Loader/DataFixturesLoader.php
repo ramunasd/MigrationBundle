@@ -4,7 +4,6 @@ namespace RDV\Bundle\MigrationBundle\Migration\Loader;
 
 use Doctrine\ORM\EntityManager;
 use RDV\Bundle\MigrationBundle\Entity\DataFixture;
-use RDV\Bundle\MigrationBundle\Fixture\LoadedFixtureVersionAwareInterface;
 use RDV\Bundle\MigrationBundle\Fixture\VersionedFixtureInterface;
 use RDV\Bundle\MigrationBundle\Migration\Sorter\DataFixturesSorter;
 use RDV\Bundle\MigrationBundle\Migration\UpdateDataFixturesFixture;
@@ -96,9 +95,7 @@ class DataFixturesLoader extends ContainerAwareLoader
             if ($fixtureObject instanceof VersionedFixtureInterface
                 && version_compare($loadedVersion, $fixtureObject->getVersion()) == -1
             ) {
-                if ($fixtureObject instanceof LoadedFixtureVersionAwareInterface) {
-                    $fixtureObject->setLoadedVersion($loadedVersion);
-                }
+                $fixtureObject->setLoadedVersion($loadedVersion);
                 $alreadyLoaded = false;
             }
         }
