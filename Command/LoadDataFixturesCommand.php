@@ -2,7 +2,6 @@
 
 namespace RDV\Bundle\MigrationBundle\Command;
 
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use RDV\Bundle\MigrationBundle\Migration\Loader\DataFixturesLoader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -144,7 +143,7 @@ class LoadDataFixturesCommand extends ContainerAwareCommand
             )
         );
 
-        $executor = new ORMExecutor($this->getContainer()->get('doctrine.orm.entity_manager'));
+        $executor = $this->getContainer()->get('rdv_migration.data_fixtures.executor');
         $executor->setLogger(
             function ($message) use ($output) {
                 $output->writeln(sprintf('  <comment>></comment> <info>%s</info>', $message));

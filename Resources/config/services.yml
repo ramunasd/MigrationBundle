@@ -1,6 +1,7 @@
 parameters:
     rdv_migration.db_id_name_generator.class:            RDV\Bundle\MigrationBundle\Tools\DbIdentifierNameGenerator
     rdv_migration.data_fixtures.loader.class:            RDV\Bundle\MigrationBundle\Migration\Loader\DataFixturesLoader
+    rdv_migration.data_fixtures.executor.class:          Doctrine\Common\DataFixtures\Executor\ORMExecutor
     rdv_migration.migrations.loader.class:               RDV\Bundle\MigrationBundle\Migration\Loader\MigrationsLoader
     rdv_migration.migrations.query_executor.class:       RDV\Bundle\MigrationBundle\Migration\MigrationQueryExecutor
     rdv_migration.migrations.executor.class:             RDV\Bundle\MigrationBundle\Migration\MigrationExecutorWithNameGenerator
@@ -19,6 +20,11 @@ services:
         arguments:
             - @doctrine.orm.entity_manager
             - @service_container
+
+    rdv_migration.data_fixtures.executor:
+        class: %rdv_migration.data_fixtures.executor.class%
+        arguments:
+            - @doctrine.orm.entity_manager
 
     rdv_migration.migrations.loader:
         class: %rdv_migration.migrations.loader.class%
