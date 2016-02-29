@@ -1,0 +1,14 @@
+# minimal configuration to get doctrine working
+framework:
+  secret: secret
+doctrine:
+  dbal:
+    default_connection: default
+    connections:
+      default:
+        driver: pdo_sqlite
+        memory: true
+  orm:
+    entity_managers:
+      default:
+        connection: ~
