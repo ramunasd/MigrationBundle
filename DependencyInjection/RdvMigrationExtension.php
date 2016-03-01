@@ -17,6 +17,11 @@ class RdvMigrationExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('rdv_migration', $config);
+        foreach ($config as $key => $value) {
+            $param = 'rdv_migration.' . $key;
+            if (!$container->hasParameter($param)) {
+                $container->setParameter($param, $value);
+            }
+        }
     }
 }

@@ -33,6 +33,8 @@ services:
             - "@doctrine.dbal.default_connection"
             - "@service_container"
             - "@event_dispatcher"
+        calls:
+            - [setMigrationPath, ["%rdv_migration.migration_path%"]]
 
     rdv_migration.migrations.query_executor:
         class: %rdv_migration.migrations.query_executor.class%

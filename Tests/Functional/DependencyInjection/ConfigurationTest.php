@@ -14,35 +14,44 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         array_map('unlink', glob(__DIR__ . '/../Fixture/cache/test/*.[php|xml]*'));
     }
 
-    public function testMigrationsIsLoadedOnlyFromCertainPath()
+    public function testMigrationsLoadedFromDefaultPath()
+    {
+        $kernel = new Kernel('test', true);
+        $kernel->setRegistrableBundles(
+            array(
+                new TestPackageTest1Bundle(),
+                new TestPackageTest2Bundle(),
+            )
+        );
+
+        $kernel->boot();
+
+        $container = $kernel->getContainer();
+        $path = $container->getParameter('rdv_migration.migration_path');
+        $this->assertEquals(MigrationsLoader::DEFAULT_MIGRATIONS_PATH, $path);
+
+        /** @var \RDV\Bundle\MigrationBundle\Migration\Loader\MigrationsLoader $loader */
+        $loader = $container->get('rdv_migration.migrations.loader');
+        $migrations = $loader->getMigrations();
+        $this->assertCount(8, $migrations);
+    }
+
+    public function testMigrationLoadedFromCustomPath()
     {
         $kernel = new Kernel('test', true);
         $kernel->setRegistrableBundles(array(
             new TestPackageTest1Bundle(),
             new TestPackageTest2Bundle(),
         ));
-
-        $kernel->boot();
-
-        $container = $kernel->getContainer();
-        $config = $container->getParameter('rdv_migration');
-        $this->assertEquals(MigrationsLoader::DEFAULT_MIGRATIONS_PATH, $config['migration_path']);
-
-        /** @var \RDV\Bundle\MigrationBundle\Migration\Loader\MigrationsLoader $loader */
-        $loader = $container->get('rdv_migration.migrations.loader');
-        $migrations = $loader->getMigrations();
-        $this->assertCount(8, $migrations);
-
-        $kernel->shutdown();
-        $this->tearDown();
         $kernel->setConfigCallback(function ($container) {
-            $container->setParameter('rdv_migration', array(
-                'migration_path' => 'NonExistingPath',
-            ));
+            $container->setParameter('rdv_migration.migration_path', 'NonExistingPath');
         });
         $kernel->boot();
+        $container = $kernel->getContainer();
+        $path = $container->getParameter('rdv_migration.migration_path');
+        $this->assertEquals('NonExistingPath', $path);
 
-        $loader->setMigrationPath('NonExistingPath');
+        $loader = $container->get('rdv_migration.migrations.loader');
         $migrations = $loader->getMigrations();
         $this->assertCount(2, $migrations); // 2 migrations comes from this bundle itself, @todo
     }

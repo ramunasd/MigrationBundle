@@ -20,6 +20,24 @@ class Kernel extends KernelForTest
     /**
      * {@inheritdoc}
      */
+    public function getCacheDir()
+    {
+        $this->cacheDir = sys_get_temp_dir() . '/kernel' . mt_rand();
+        mkdir($this->cacheDir, 0755, true);
+        return $this->cacheDir;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getContainerClass()
+    {
+        return parent::getContainerClass() . mt_rand();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function registerBundles()
     {
         $bundles = [
@@ -63,5 +81,11 @@ class Kernel extends KernelForTest
         if (is_callable($this->configCallback)) {
             $loader->load($this->configCallback);
         }
+    }
+
+    public function __destruct()
+    {
+        array_map('unlink', glob($this->cacheDir . '/*'));
+        rmdir($this->cacheDir);
     }
 }

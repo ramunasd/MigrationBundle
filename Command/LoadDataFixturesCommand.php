@@ -11,12 +11,6 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 class LoadDataFixturesCommand extends ContainerAwareCommand
 {
-    const MAIN_FIXTURES_TYPE = 'main';
-    const DEMO_FIXTURES_TYPE = 'demo';
-
-    const MAIN_FIXTURES_PATH = 'Migrations/Data/ORM';
-    const DEMO_FIXTURES_PATH = 'Migrations/Data/Demo/ORM';
-
     /**
      * {@inheritdoc}
      */
@@ -30,11 +24,11 @@ class LoadDataFixturesCommand extends ContainerAwareCommand
                 InputOption::VALUE_OPTIONAL,
                 sprintf(
                     'Select fixtures type to be loaded (%s or %s). By default - %s',
-                    self::MAIN_FIXTURES_TYPE,
-                    self::DEMO_FIXTURES_TYPE,
-                    self::MAIN_FIXTURES_TYPE
+                    DataFixturesLoader::MAIN_FIXTURES_TYPE,
+                    DataFixturesLoader::DEMO_FIXTURES_TYPE,
+                    DataFixturesLoader::MAIN_FIXTURES_TYPE
                 ),
-                self::MAIN_FIXTURES_TYPE
+                DataFixturesLoader::MAIN_FIXTURES_TYPE
             )
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Outputs list of fixtures without apply them')
             ->addOption(
@@ -167,10 +161,17 @@ class LoadDataFixturesCommand extends ContainerAwareCommand
      */
     protected function getFixtureRelativePath(InputInterface $input)
     {
-        $fixtureRelativePath = $this->getTypeOfFixtures($input) == self::DEMO_FIXTURES_TYPE
-            ? self::DEMO_FIXTURES_PATH
-            : self::MAIN_FIXTURES_PATH;
+        switch ($this->getTypeOfFixtures($input)) {
+            case DataFixturesLoader::MAIN_FIXTURES_TYPE:
+                $path = $this->getContainer()->getParameter('rdv_migration.fixtures_path_main');
+                break;
+            case DataFixturesLoader::DEMO_FIXTURES_TYPE:
+                $path = $this->getContainer()->getParameter('rdv_migration.fixtures_path_main');
+                break;
+            default:
+                throw new \InvalidArgumentException('Unknown fixture type');
+        }
 
-        return str_replace('/', DIRECTORY_SEPARATOR, '/' . $fixtureRelativePath);
+        return str_replace('/', DIRECTORY_SEPARATOR, '/' . $path);
     }
 }

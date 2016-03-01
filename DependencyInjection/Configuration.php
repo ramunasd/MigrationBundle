@@ -18,12 +18,11 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('migration_path')
                     ->defaultValue('Migrations/Schema')
                 ->end()
-                // default path inside each bundle to load fixtures and sample data
-                ->scalarNode('fixtures_path')
-                    ->defaultValue('Migrations/Data')
+                ->scalarNode('fixtures_path_main')
+                    ->defaultValue('Migrations/Data/ORM')
                 ->end()
-                ->arrayNode('namespaces')
-                    ->prototype('scalar')->end()
+                ->scalarNode('fixtures_path_demo')
+                    ->defaultValue('Migrations/Data/Demo/ORM')
                 ->end()
             ->end();
 
