@@ -54,6 +54,16 @@ class AppKernel extends Kernel
 }
 ```
 
+Configuration
+-------------
+
+``` yaml
+rdv_migration:
+    migration_path: "Migrations/Schema"
+    fixtures_path_main: "Migrations/Data/ORM"
+    fixtures_path_demo: "Migrations/Data/Demo/ORM"
+```
+
 
 Database structure migrations
 -----------------------------

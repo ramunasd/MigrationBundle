@@ -25,7 +25,7 @@ use RDV\Bundle\MigrationBundle\Event\PreMigrationEvent;
  */
 class MigrationsLoader
 {
-    const MIGRATIONS_PATH = 'Migrations/Schema';
+    const DEFAULT_MIGRATIONS_PATH = 'Migrations/Schema';
 
     /**
      * @var KernelInterface
@@ -66,6 +66,11 @@ class MigrationsLoader
     protected $excludeBundles;
 
     /**
+     * @var string
+     */
+    protected $migrationPath = self::DEFAULT_MIGRATIONS_PATH;
+
+    /**
      * @param KernelInterface          $kernel
      * @param Connection               $connection
      * @param ContainerInterface       $container
@@ -97,6 +102,17 @@ class MigrationsLoader
     public function setExcludeBundles($excludeBundles)
     {
         $this->excludeBundles = $excludeBundles;
+    }
+
+    /**
+     * @param string $migrationPath
+     * @return $this
+     */
+    public function setMigrationPath($migrationPath)
+    {
+        $this->migrationPath = $migrationPath;
+
+        return $this;
     }
 
     /**
@@ -152,12 +168,7 @@ class MigrationsLoader
 
         $bundles = $this->getBundleList();
         foreach ($bundles as $bundleName => $bundle) {
-            $bundlePath          = $bundle->getPath();
-            $bundleMigrationPath = str_replace(
-                '/',
-                DIRECTORY_SEPARATOR,
-                $bundlePath . '/' . self::MIGRATIONS_PATH
-            );
+            $bundleMigrationPath = $this->getBundleMigrationPath($bundle->getPath());
 
             if (is_dir($bundleMigrationPath)) {
                 $bundleMigrationDirectories = [];
@@ -187,6 +198,16 @@ class MigrationsLoader
 
         return $result;
     }
+
+    /**
+     * @param string $bundlePath
+     * @return string
+     */
+    protected function getBundleMigrationPath($bundlePath)
+    {
+        return realpath(str_replace('/', DIRECTORY_SEPARATOR, $bundlePath . '/' . $this->migrationPath));
+    }
+
 
     /**
      * Finds migration files and call "include_once" for each file

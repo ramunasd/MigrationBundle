@@ -18,34 +18,36 @@ services:
     rdv_migration.data_fixtures.loader:
         class: %rdv_migration.data_fixtures.loader.class%
         arguments:
-            - @doctrine.orm.entity_manager
-            - @service_container
+            - "@doctrine.orm.entity_manager"
+            - "@service_container"
 
     rdv_migration.data_fixtures.executor:
         class: %rdv_migration.data_fixtures.executor.class%
         arguments:
-            - @doctrine.orm.entity_manager
+            - "@doctrine.orm.entity_manager"
 
     rdv_migration.migrations.loader:
         class: %rdv_migration.migrations.loader.class%
         arguments:
-            - @kernel
-            - @doctrine.dbal.default_connection
-            - @service_container
-            - @event_dispatcher
+            - "@kernel"
+            - "@doctrine.dbal.default_connection"
+            - "@service_container"
+            - "@event_dispatcher"
+        calls:
+            - [setMigrationPath, ["%rdv_migration.migration_path%"]]
 
     rdv_migration.migrations.query_executor:
         class: %rdv_migration.migrations.query_executor.class%
         arguments:
-            - @doctrine.dbal.default_connection
+            - "@doctrine.dbal.default_connection"
 
     rdv_migration.migrations.executor:
         class: %rdv_migration.migrations.executor.class%
         arguments:
-            - @rdv_migration.migrations.query_executor
+            - "@rdv_migration.migrations.query_executor"
         calls:
-            - [setExtensionManager, [@rdv_migration.migrations.extension_manager]]
-            - [setNameGenerator, [@rdv_migration.db_id_name_generator]]
+            - [setExtensionManager, ["@rdv_migration.migrations.extension_manager"]]
+            - [setNameGenerator, ["@rdv_migration.db_id_name_generator"]]
 
     rdv_migration.migration.pre_up.listener:
         class: %rdv_migration.migration.pre_up.listener.class%
@@ -68,13 +70,13 @@ services:
     rdv_migration.tools.schema_dumper:
         class: %rdv_migration.tools.schema_dumper.class%
         arguments:
-            - @twig
+            - "@twig"
         lazy: true
 
     rdv_migration.twig.schema_dumper:
         class: %rdv_migration.twig.schema_dumper.class%
         arguments:
-            - @doctrine
+            - "@doctrine"
         tags:
             - { name: twig.extension }
 

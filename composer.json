@@ -15,5 +15,8 @@
     "autoload": {
         "psr-4": { "RDV\\Bundle\\MigrationBundle\\": "" }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require-dev": {
+        "doctrine/doctrine-bundle": "^1.6"
+    }
 }

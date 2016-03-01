@@ -12,6 +12,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class DataFixturesLoader extends ContainerAwareLoader
 {
+    const MAIN_FIXTURES_TYPE = 'main';
+    const DEMO_FIXTURES_TYPE = 'demo';
+
     /** @var EntityManager */
     protected $em;
 
